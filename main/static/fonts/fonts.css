@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'untitled-sans-medium';
+  src: url('/static/fonts/test-untitled-sans-medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'untitled-sans-regular';
+  src: url('/static/fonts/test-untitled-sans-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'untitled-sans-light';
+  src: url('/static/fonts/test-untitled-sans-light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'PPSupplyMono-Regular';
+  src: url('/static/fonts/PPSupplyMono-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'PPSupplyMono-Ultralight';
+  src: url('/static/fonts/PPSupplyMono-Ultralight.otf') format('opentype');
+}

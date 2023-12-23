@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navigation-1 {
+    font-family: 'untitled-sans-medium';
+}
+
+.navigation-2 {
+    font-family: 'untitled-sans-regular';
+}
+
+.mono-ultralight {
+    font-family: 'PPSupplyMono-Ultralight';
+}
+
+.mono-regular {
+    font-family: 'PPSupplyMono-Regular';
+}
