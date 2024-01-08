@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/fonts/fonts.css" rel="stylesheet">
+    <link href="/static/styles/output.css" rel="stylesheet">
+    <script src="https://pixijs.download/release/pixi.js"></script>
+    <script src="/static/js/moveable.js"></script>
+    <title>VisualWrap</title>
+</head>
+<body class="h-screen bg-gradient-to-t  from-blue-50">
+    <div class="grid pl-3 ">
+        <h1 class="navigation-1 font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">VisualWrap</h1>
+    </div>
+    <div class="grid">
+        <div >
+            <div class="pl-3 navigation-2 flex gap-x-2 pb-1 ">
+                    <p class="antialiased underline decoration-1 hover:decoration-2 t hover:bg-slate-100 hover:cursor-pointer cus-nav-row">File</p>
+                    <p class="antialiased underline decoration-1 hover:decoration-2 hover:bg-slate-100 hover:cursor-pointer cus-nav-row">Edit</p>
+                    <p class="antialiased underline decoration-1 hover:decoration-2 hover:bg-slate-100 hover:cursor-pointer cus-nav-row">Run</p>
+                    <p class="antialiased underline decoration-1 hover:decoration-2 hover:bg-slate-100 hover:cursor-pointer cus-nav-row">Editor</p>
+                    <p class="antialiased underline decoration-1 hover:decoration-2 hover:bg-slate-100 hover:cursor-pointer cus-nav-row">Help</p>
+            </div>
+        <div id="coordinate-div" class="mb-3 flex justify-center gap-x-2">
+                <div class="flex gap-3"> 
+                    <div class="flex gap-1">
+                      <div class="mono-regular">X:</div><div id="x-coordinate" class="mono-ultralight"></div>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="mono-regular">Y:</div><div id="y-coordinate" class="mono-ultralight"></div>
+                    </div> 
+               </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div id="canvasContainer" class="canvas-container"></div>
+            <script type="module" src="/static/js/app.js"></script> 
+            <!--<div id="lines-container" class=" ml-3 max-h-[400px] w-48 border overflow-y-scroll">
+                <div id="lines-pointer"></div>
+            </div> -->
+            <canvas id="canvas-2" width="400" height="400">
+
+            </canvas>
+        </div> 
+      <!--<div id="draggable-container" class="draggable-container absolute">
+        <div id="drag-handle" class="drag-handle bg-gray-700 text-white p-1 cursor-move">Editor
+          <span class="close-icon float-right cursor-pointer hover:text-sky-700">
+                     </span>
+
+        </div>
+        <textarea id="code-editor" class="textarea-code resize h-64 p-3 font-mono text-xs border focus:outline-none focus:border-sky-700 hover:border-sky-700"></textarea>
+      </div>-->
+
+      <div id="draggable-container" class="border draggable-container absolute">
+        <div id="drag-handle" class="drag-handle bg-gray-700 text-white p-1 cursor-move flex justify-between items-center">
+          Editor
+          <span class="close-icon cursor-pointer hover:text-sky-700">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+          </span>
+        </div>
+        <div class="flex">
+          <div id="line-numbers" class="pt-3 bg-transparent line-numbers text-right pl-2 pr-2 font-mono text-xs"></div>
+          <textarea id="code-editor" class="textarea-code bg-transparent resize p-3 font-mono text-xs focus:outline-none focus:border-sky-700 hover:border-sky-700"></textarea>
+        </div>
+      </div>
+
+           
+  </body>
+</html>
+

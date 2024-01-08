@@ -34,7 +34,9 @@ func main() {
             w.Header().Set("Content-Type", "font/woff2")
         } else if strings.HasSuffix(r.URL.Path, ".otf") {
             w.Header().Set("Content-Type", "font/otf")
-        }
+        } else if strings.HasSuffix(r.URL.Path, ".mjs") {
+	    w.Header().Set("Content-Type", "application/javascript")
+	}
 
         // Serve file only if it's not a JS, CSS, or font file
         // Or if the correct Content-Type has been set

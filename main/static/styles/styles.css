@@ -17,3 +17,24 @@
 .mono-regular {
     font-family: 'PPSupplyMono-Regular';
 }
+
+#drag-handle {
+  font-family: 'untitled-sans-medium';
+}
+
+.line-numbers {
+  line-height: 1; /* Adjust this to match the line height of your textarea */
+  user-select: none; /* Prevents user from selecting the line numbers */
+}
+
+.textarea-code {
+  line-height: 1; /* Ensure this matches the line height of line-numbers */
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.dropdown-group:hover .dropdown-menu {
+  display: block;
+}
+
+
