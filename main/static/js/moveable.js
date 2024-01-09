@@ -80,24 +80,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
     lineNumbers.scrollTop = codeEditor.scrollTop;
   });
 
+  /*function adjustTextareaWidth() {
+    // Create a temporary span element to calculate the width of the textarea content
+    const tempSpan = document.createElement('span');
+    // Copy text styles to ensure width calculation is as accurate as possible
+    tempSpan.style.font = window.getComputedStyle(codeEditor).font;
+    tempSpan.style.visibility = 'hidden'; // Hide the element
+    tempSpan.style.whiteSpace = 'nowrap'; // Prevent wrapping
+    tempSpan.innerText = codeEditor.value.replace(/\n/g, ' '); // Replace newlines with spaces for width calculation
+    document.body.appendChild(tempSpan); // Add to the body to get dimensions
+
+    // Calculate the new width based on content
+    const newWidth = Math.max(tempSpan.offsetWidth + 20, codeEditor.offsetWidth);
+    codeEditor.style.width = `${newWidth}px`;
+
+    // Clean up by removing the temporary span element
+    document.body.removeChild(tempSpan);
+  }*/
+
   function adjustTextareaWidth() {
-  // Create a temporary span element to calculate the width of the textarea content
-  const tempSpan = document.createElement('span');
-  // Copy text styles to ensure width calculation is as accurate as possible
-  tempSpan.style.font = window.getComputedStyle(codeEditor).font;
-  tempSpan.style.visibility = 'hidden'; // Hide the element
-  tempSpan.style.whiteSpace = 'nowrap'; // Prevent wrapping
-  tempSpan.innerText = codeEditor.value.replace(/\n/g, ' '); // Replace newlines with spaces for width calculation
-  document.body.appendChild(tempSpan); // Add to the body to get dimensions
+    const lines = codeEditor.value.split('\n');
+    let maxWidth = codeEditor.offsetWidth;
 
-  // Calculate the new width based on content
-  const newWidth = Math.max(tempSpan.offsetWidth + 20, codeEditor.offsetWidth);
-  codeEditor.style.width = `${newWidth}px`;
+    // Create a temporary span element to calculate the width of each line
+    const tempSpan = document.createElement('span');
+    tempSpan.style.font = window.getComputedStyle(codeEditor).font;
+    tempSpan.style.visibility = 'hidden'; // Hide the element
+    tempSpan.style.whiteSpace = 'nowrap'; // Prevent wrapping
+    document.body.appendChild(tempSpan); // Add to the body to get dimensions
 
-  // Clean up by removing the temporary span element
-  document.body.removeChild(tempSpan);
-}
+    // Calculate the new width based on the longest line
+    lines.forEach(line => {
+      tempSpan.innerText = line;
+      maxWidth = Math.max(maxWidth, tempSpan.offsetWidth + 20); // +20 for some padding
+    });
 
-// Adjust the textarea width whenever the content changes
-document.getElementById('code-editor').addEventListener('input', adjustTextareaWidth);
+    // Update the textarea width only if a line exceeds the current width
+    if (maxWidth > codeEditor.offsetWidth) {
+      codeEditor.style.width = `${maxWidth}px`;
+    }
+
+    // Clean up by removing the temporary span element
+    document.body.removeChild(tempSpan);
+  } 
+  document.getElementById('code-editor').addEventListener('input', adjustTextareaWidth);
 });
