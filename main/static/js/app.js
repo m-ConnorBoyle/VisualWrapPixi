@@ -80,11 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let lineContainer = new PIXI.Container();
     lineContainer.interactive = true;
     lineContainer.buttonMode = true;
+    let myOffset = canvasWidth / 2;
+    let startX2 = startX + myOffset;
+    let startY2 = startY + myOffset;
+    /*if (startX2 < 0) {
+      startX2 = xCoord + canvasWidth;
+    } 
+    if (startY2 < 0) {
+      startY2 = yCoord + canvasWidth;
+    }*/
 
-    //let graphics1 = createLine(startX, startY, colour, angleInDegrees);
-    //lineContainer.addChild(graphics1);
+    let graphics1 = createLine(startX, startY, colour, angleInDegrees, thickness);
+    lineContainer.addChild(graphics1);
 
-    let graphics2 = createLine(startX, startY, colour, -angleInDegrees, thickness);
+    let graphics2 = createLine(startX2, startY2, colour, angleInDegrees, thickness);
     lineContainer.addChild(graphics2);
 
     lineContainer.on('mouseenter', (e) => {
@@ -94,11 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    lineContainer.on('mousedown', () => {
+   /* lineContainer.on('mousedown', () => {
       lineContainer.children.forEach(child => {
         child.tint = 0x000000;
       });
-    });
+    });*/
 
     lineContainer.on('mouseleave', () => {
       lineContainer.children.forEach(child => {
@@ -107,6 +116,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+
+    //Dragging
+    let dragging = false;
+   
+    lineContainer.on('pointerdown', (event) => {
+      // Capture the pointer to make sure we track the drag event even if the mouse moves fast
+      lineContainer.data = event.data;
+      lineContainer.alpha = 0.5; // Optional: visual cue for dragging
+      dragging = true;
+      lineContainer.draggingData = event.data;
+      lineContainer.startPosition = lineContainer.toGlobal(event.data.getLocalPosition(lineContainer));
+    });
+
+    lineContainer.on('pointermove', () => {
+      if (dragging) {
+        let newPosition = lineContainer.draggingData.getLocalPosition(lineContainer.parent);
+        lineContainer.x += (newPosition.x - lineContainer.startPosition.x);
+        lineContainer.y += (newPosition.y - lineContainer.startPosition.y);
+        lineContainer.startPosition = newPosition;
+      }
+    });
+
+    lineContainer.on('pointerup', endDrag);
+    lineContainer.on('pointerupoutside', endDrag);
+
+    function endDrag() {
+      dragging = false;
+      lineContainer.alpha = 1; // Reset opacity
+      lineContainer.data = null;
+    }
+
+    app.stage.addChild(lineContainer);
 
     app.stage.addChild(lineContainer);
   }
@@ -178,7 +219,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentWidth = init; 
     for (let i = 0; i < passes; i++) {
      // generateLineObject(xCoord, yCoord, color, 45, currentWidth);
-      generateLineObject(xCoord, yCoord, '0xff0000', 45, currentWidth);
+      generateLineObject(xCoord, yCoord, '0xff0000', -45, currentWidth);
+      
+      //generateLineObject(xCoord, yCoord, '0xff0000', 45, currentWidth);
       if (direction === 'Left') {
         xCoord = xCoord - currentWidth;
       } else if (direction === 'Right') {   
